@@ -21,7 +21,7 @@
           <td>{{phoneDetails.phoneNumber}}</td>
           <td>{{phoneDetails.email}}</td>
 
-          <td><button type="button" class="btn btn-warning" data-bs-toggle="modal"
+          <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" (click)="setPhoneNoDetails(phoneDetails)"
               data-bs-target="#myModal">Edit</button>
             <button type="button" class="ms-3 btn btn-danger" (click)="deletePhoneumber(phoneDetails)">Delete</button>
           </td>
@@ -44,24 +44,24 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="phoneNumber" >
         <div class=" mb-3 mt-3">
           <label for="name" class="form-label">Name:</label>
-          <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name">
+          <input type="text" [(ngModel)]="phoneNumber.name" class="form-control" id="name" placeholder="Enter Name" name="name">
         </div>
         <div class="mb-3 mt-3">
           <label for="email" class="form-label">Email:</label>
-          <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+          <input type="email" [(ngModel)]="phoneNumber.email" class="form-control" id="email" placeholder="Enter email" name="email">
         </div>
         <div class="mb-3">
           <label for="phno" class="form-label">Ph No:</label>
-          <input type="number" class="form-control" id="phno" placeholder="Enter Ph No" name="phno">
+          <input type="number" [(ngModel)]="phoneNumber.phoneNumber" class="form-control" id="phno" placeholder="Enter Ph No" name="phno">
         </div>
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-bs-dismiss="modal">Update</button>
+        <button type="button" class="btn btn-info" data-bs-dismiss="modal" (click)="updatePhoneNumberDetails(phoneNumber)">Update</button>
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
       </div>
     </div>

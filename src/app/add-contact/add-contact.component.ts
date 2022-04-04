@@ -8,19 +8,25 @@ import { PhoneService } from '../phone.service';
   styleUrls: ['./add-contact.component.css']
 })
 export class AddContactComponent implements OnInit {
-  name: string="";
-  email:string = "";
+  name: string = "";
+  email: string = "";
   phoneNumber: number | undefined;
-   phoneNo : PhoneNumber | undefined;
+  phoneNo: PhoneNumber | undefined;
   constructor(private phoneService: PhoneService) { }
 
   ngOnInit(): void {
   }
 
-  savePhoneNumber(){
-   this.phoneNo = new PhoneNumber(this.name, this.email,Number(this.phoneNumber));
-    this.phoneService.savePhoneNumber(this.phoneNo).subscribe(data=>{
-      if(data){
+  savePhoneNumber() {
+    this.phoneNo = new PhoneNumber();
+    this.phoneNo.name = this.name;
+    this.phoneNo.email = this.email;
+    this.phoneNo.phoneNumber = this.phoneNumber;
+    this.phoneService.savePhoneNumber(this.phoneNo).subscribe(data => {
+      if (data) {
+        this.name = "";
+        this.email = "";
+        this.phoneNumber = undefined;
         alert("success");
       }
     })

@@ -10,7 +10,10 @@ import { PhoneService } from '../phone.service';
 export class ContactsComponent implements OnInit {
 
   contacts!: PhoneNumber[];
-  constructor(private phoneNoService: PhoneService) { }
+  phoneNumber!: PhoneNumber;
+  constructor(private phoneNoService: PhoneService) {
+    this.phoneNumber = new PhoneNumber();
+  }
 
   ngOnInit(): void {
     this.getContacts();
@@ -25,20 +28,34 @@ export class ContactsComponent implements OnInit {
 
   deletePhoneumber(phoneNo: PhoneNumber) {
     if (phoneNo.phoneNumber)
-      this.phoneNoService.deletePhoneNumber(phoneNo.phoneNumber).subscribe(data=>{
-        if(data){
+      this.phoneNoService.deletePhoneNumber(phoneNo.phoneNumber).subscribe(data => {
+        if (data) {
           alert("record deleted successfully.")
-          for(let index = 0; index < this.contacts?.length; index++) {
-            if(this.contacts[index] === phoneNo){
-              this.contacts.splice(index , 1)  ;
+          for (let index = 0; index < this.contacts?.length; index++) {
+            if (this.contacts[index] === phoneNo) {
+              this.contacts.splice(index, 1);
             }
           }
-        }else{
+        } else {
           alert("Unable to delete record.")
         }
       })
-    else{
+    else {
       alert("Phone is not valid!")
     }
+  }
+
+  setPhoneNoDetails(phoneNo: PhoneNumber) {
+    this.phoneNumber.name = phoneNo.name;
+    this.phoneNumber.email = phoneNo.email;
+    this.phoneNumber.phoneNumber = phoneNo.phoneNumber;
+  }
+  updatePhoneNumberDetails(phoneNumber: PhoneNumber){
+    this.phoneNoService.updatePhoneNumber(phoneNumber).subscribe(data=>{
+      if(data){
+        this.getContacts();
+        alert("data updated!")
+      }
+    })
   }
 }

@@ -24,4 +24,8 @@ export class PhoneService {
    return this.httpClient.delete(this.baseUrl+"/delete",{params:{"phoneNumber":phoneNumber}});
   }
 
+  updatePhoneNumber(phoneNumber: PhoneNumber): Observable<any>{
+    return this.httpClient.put(this.baseUrl+"/update",phoneNumber);
+   }
+
 }
