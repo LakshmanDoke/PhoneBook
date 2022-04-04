@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PhoneNumber } from '../models/PhoneNumber';
+import { PhoneService } from '../phone.service';
 
 @Component({
   selector: 'app-add-contact',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-contact.component.css']
 })
 export class AddContactComponent implements OnInit {
-
-  constructor() { }
+  name: String="";
+  email:String = "";
+  phoneNumber: number | undefined;
+   phoneNo : PhoneNumber | undefined;
+  constructor(private phoneService: PhoneService) { }
 
   ngOnInit(): void {
   }
 
+  savePhoneNumber(){
+   this.phoneNo = new PhoneNumber(this.name, this.email,Number(this.phoneNumber));
+    this.phoneService.savePhoneNumber(this.phoneNo).subscribe(data=>{
+      if(data){
+        alert("success");
+      }
+    })
+  }
 }

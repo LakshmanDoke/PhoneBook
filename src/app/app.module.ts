@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { AddContactComponent } from './add-contact/add-contact.component';
-
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 const routes: Routes = [
@@ -30,7 +31,9 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule,
+    HttpClientModule
   ],
   exports: [RouterModule],
   providers: [],
