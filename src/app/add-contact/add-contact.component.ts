@@ -8,8 +8,8 @@ import { PhoneService } from '../phone.service';
   styleUrls: ['./add-contact.component.css']
 })
 export class AddContactComponent implements OnInit {
-  name: String="";
-  email:String = "";
+  name: string="";
+  email:string = "";
   phoneNumber: number | undefined;
    phoneNo : PhoneNumber | undefined;
   constructor(private phoneService: PhoneService) { }

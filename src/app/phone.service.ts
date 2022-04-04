@@ -7,7 +7,8 @@ import { PhoneNumber } from './models/PhoneNumber';
   providedIn: 'root'
 })
 export class PhoneService {
-  private baseUrl: String = "http://localhost:8080"
+
+  private baseUrl: string = "http://localhost:8080"
   constructor(private httpClient: HttpClient) {
   }
 
@@ -17,6 +18,10 @@ export class PhoneService {
 
   getAllPhoneNumbers(): Observable<any> {
     return this.httpClient.get(this.baseUrl + "/get-contact");
+  }
+
+  deletePhoneNumber(phoneNumber: number): Observable<any>{
+   return this.httpClient.delete(this.baseUrl+"/delete",{params:{"phoneNumber":phoneNumber}});
   }
 
 }
